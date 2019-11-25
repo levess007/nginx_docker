@@ -12,9 +12,16 @@ spec:
       labels:
         app: nginx
     spec:
+      volumes:
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim
       containers:
-      - name: nginx
-        image: levess007/nginx:latest
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 80
+        - name: nginx
+          image: levess007/nginx:latest
+          imagePullPolicy: Never
+          ports:
+          - containerPort: 80
+          volumeMounts:
+            - mountPath: "/var/www"
+              name: task-pv-storage
