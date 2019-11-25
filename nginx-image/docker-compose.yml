@@ -3,7 +3,7 @@ services:
 
   #Nginx Service
   webserver:
-    image: nginx
+    image: nginx:alpine
     container_name: webserver
     ports:
       - "80:80"
