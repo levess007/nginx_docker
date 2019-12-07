@@ -4,9 +4,10 @@ metadata:
   name: webserver
 spec:
   volumes:
-    - name: task-pv-storage
-      persistentVolumeClaim:
-        claimName: task-pv-claim
+    - name: nfs-volume
+      nfs:
+        server: 10.254.0.9
+        path: /mnt/share
   containers:
     - name: nginx
       image: levess007/nginx:latest
@@ -15,4 +16,4 @@ spec:
       - containerPort: 80
       volumeMounts:
         - mountPath: "/var/www"
-          name: task-pv-storage
+          name: nfs-volume
